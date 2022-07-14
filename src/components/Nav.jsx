@@ -16,16 +16,19 @@ export default function Nav() {
       </div>
       <ul className="flex text-white font-bold items-center">
         {session ? (
-          <Link
-            href="/dashboard"
-          >
-            <a className="mr-4 cursor-pointer bg-white rounded-md px-6 py-2 text-md text-black"> Dashboard</a>
+          <Link href="/dashboard">
+            <a className="mr-4 cursor-pointer bg-white rounded-md px-6 py-2 text-md text-black">
+              {" "}
+              Dashboard
+            </a>
           </Link>
         ) : (
           <li
             className="mx-7 cursor-pointer bg-white rounded-md px-6 py-2 text-md text-black"
             onClick={() => {
-              signIn("google");
+              signIn("google", {
+                callbackUrl: "/dashboard",
+              });
             }}
           >
             Login
