@@ -39,6 +39,14 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model Books {
+  id        String  @id @default(cuid())
+  title       String
+  userId     String
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -47,6 +55,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  books         Books[]
 }
 
 model VerificationToken {

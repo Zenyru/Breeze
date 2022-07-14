@@ -1,19 +1,12 @@
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
+import Logo from "../components/Logo";
 
 export default function Nav() {
   const { data: session } = useSession();
   return (
     <nav className="h-20 bg-[rgba(255,255,255,.2)] flex justify-between items-center ">
-      <div className="flex">
-        <img className="w-6 ml-5" src="/images/logo.svg" alt="logo" />
-        <a
-          href="/"
-          className="ml-3 cursor-pointer font-extrabold text-3xl text-white"
-        >
-          Breeze
-        </a>
-      </div>
+      <Logo />
       <ul className="flex text-white font-bold items-center">
         {session ? (
           <Link href="/dashboard">
