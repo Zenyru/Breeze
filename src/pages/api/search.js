@@ -21,7 +21,7 @@ export default async function searchQuery(req, res) {
       return res.status(200).json({
         message: data.items.map(book => {
           return {
-            imageLink: book.volumeInfo.imageLinks?.thumbnail,
+            imageLink: book.volumeInfo.imageLinks?.thumbnail ?? "https://via.placeholder.com/128x193",
             title: book.volumeInfo.title,
           };
         }),
