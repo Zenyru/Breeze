@@ -35,19 +35,12 @@ export default function Input() {
           setIsThereData(false);
         }
 
-        console.log(books);
       } catch (error) {
         setIsDataLoaded(false);
         setIsThereData(false);
       }
     }
   };
-
-  // useEffect(() => {
-  //   document.querySelector("input").addEventListener("focus", () => {
-  //     console.log("katawahapiya");
-  //   });
-  // }, []);
 
   // console.log(isSearchQuery, "isSearchQuery");
   // console.log(isSearchFocused, "isSearchFocused");
@@ -70,7 +63,6 @@ export default function Input() {
             autoComplete="off"
             onFocus={() => {
               setIsSearchFocused(true);
-              console.log("the helllllllllllllll");
             }}
             onBlur={() => {
               setIsSearchFocused(false);
