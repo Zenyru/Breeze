@@ -1,21 +1,34 @@
 import axios from "axios";
 
+
 export default async function searchQuery(req, res) {
   if (req.method === "GET") {
-    res.status(405).json({ message: "Method is not accepted" });
+    return res.status(405).json({ message: "Method is not accepted" });
   } else if (req.method === "POST") {
     let search = req.body.search;
-    const { data } = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${search.toLowerCase()}&key=${process.env.GOOGLE_API_KEY}&maxResults=20`
-    );
+    try {
+      const { data } = await axios.get(
+        "https://www.googleapis.com/books/v1/volumes",
+        {
+          params: {
+            q: search.toLowerCase(),
+            key: process.env.GOOGLE_API_KEY,
+          },
+        
+        }
+      );
 
-    res.status(200).json({
-      message: data.items.map(book => {
-        return {
-          imageLink: book.volumeInfo.imageLinks.thumbnail,
-          title: book.volumeInfo.title,
-        };
-      }),
-    });
+      return res.status(200).json({
+        message: data.items.map(book => {
+          return {
+            imageLink: book.volumeInfo.imageLinks?.thumbnail,
+            title: book.volumeInfo.title,
+          };
+        }),
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ message: error.message });
+    }
   }
 }
