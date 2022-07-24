@@ -6,8 +6,11 @@ import Input from "../components/Input";
 export default function dashboard({ user }) {
   return (
     <div className="min-h-screen bg-black">
-      <div className="pt-4">
+      <div className="pt-4 flex justify-between">
         <Logo />
+        <div  className="absolute top-5 right-0  h-10 w-10 rounded-full mr-8 overflow-hidden">
+          <img src= {user.image} alt="user avatar" />
+        </div>
       </div>
       <h1 className="text-white text-center font-bold text-2xl">
         Hi{" "}
@@ -16,7 +19,6 @@ export default function dashboard({ user }) {
         </span>{" "}
         ! Welcome to your dashboard.
       </h1>
-
       <Input />
     </div>
   );
