@@ -2,9 +2,18 @@ import { getSession, signOut } from "next-auth/react";
 import prisma from "../lib/prisma";
 import Logo from "../components/Logo";
 import Input from "../components/Input";
+import BookContainer from "../components/BookContainer";
 import { FiLogOut } from "react-icons/fi";
+import { useState } from "react";
 
 export default function dashboard({ user }) {
+  const [booksInfo, setBooksInfo] = useState([]);
+
+  const inputToDashboard = dataFromInput => {
+    console.log(dataFromInput);
+    setBooksInfo(dataFromInput);
+  };
+
   return (
     <div className="min-h-screen bg-black">
       <div className="pt-4 flex justify-between">
@@ -32,7 +41,8 @@ export default function dashboard({ user }) {
         </span>{" "}
         ! Welcome to your dashboard.
       </h1>
-      <Input />
+      <Input passingData={inputToDashboard} />
+      <BookContainer info={booksInfo} />
     </div>
   );
 }

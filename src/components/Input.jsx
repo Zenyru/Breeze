@@ -1,18 +1,32 @@
 import { HiOutlineSearch } from "react-icons/hi";
 import axios from "axios";
 import { DebounceInput } from "react-debounce-input";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Toastify from "toastify-js";
 import { useOutsideClick } from "rooks";
 
-export default function Input() {
+export default function Input({ passingData }) {
   const [books, setBooks] = useState([]);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isSearchQuery, setIsSearchQuery] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isThereData, setIsThereData] = useState(false);
+  const [bookInfo, setBookInfo] = useState([]);
 
   const ref = useRef();
+
+  useEffect(() => {
+    try {
+      axios.get("/api/addBooks").then(res => {
+        setBookInfo((res.data));
+        
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  passingData(bookInfo);
 
   const handleChange = async e => {
     if (e.target.value.length === 0) {
@@ -49,15 +63,18 @@ export default function Input() {
     const itemClicked = document.querySelector(".dropdown").childNodes[key];
     const itemImage = itemClicked.querySelector("img");
     try {
-      setIsSearchFocused(false);
       document.querySelector(".search-input").value = "";
+      setIsSearchFocused(false);
 
       const { data } = await axios.post("/api/addBooks", {
         bookId: itemClicked.id,
         title: itemClicked.innerText,
         image: itemImage.src,
       });
-      if (data.success) {
+
+      if (data) {
+        setBookInfo([...bookInfo, data]);
+        passingData(bookInfo);
 
         Toastify({
           text: "Book is added successfully",
@@ -77,11 +94,8 @@ export default function Input() {
           },
         }).showToast();
       }
-      
-      // else if (!data.success && data.message )
-
     } catch (error) {
-      if(error.response.data.message){
+      if (error.response.data.message) {
         Toastify({
           text: "Book is already added",
           duration: 2000,
@@ -99,26 +113,10 @@ export default function Input() {
             margin: "0 auto",
           },
         }).showToast();
-  
+      } else {
+        console.log(error);
       }
-      
     }
-
-    // if (!addedBooks.includes(itemClicked.id)) {
-    //   addedBooks.push(itemClicked);
-    //   console.log(addedBooks);
-    //
-
-    // } else if(addedBooks.includes(itemClicked.id)) {
-    //   Toastify({
-    //     text: "Book is already added",
-    //     duration: 3000,
-    //     style: {
-    //       background: "linear-gradient(to right, #A8EB12, #2CD261)",
-    //       position: "absolute",
-    //     },
-    //   }).showToast();
-    // }
   };
 
   const clickedOutside = () => {
@@ -127,12 +125,9 @@ export default function Input() {
 
   useOutsideClick(ref, clickedOutside);
 
-  // console.log(isSearchQuery, "isSearchQuery");
-  // console.log(isSearchFocused, "isSearchFocused");
-
   return (
     <div className="flex justify-center items-center flex-col relative">
-      <div ref={ref} className="flex flex-col items-center ">
+      <div ref={ref} className="flex flex-col items-center relative">
         <form
           onSubmit={e => e.preventDefault()}
           className="relative flex mt-8 justify-center items-center w-[35rem] "
@@ -149,13 +144,10 @@ export default function Input() {
               setIsSearchFocused(true);
             }}
             spellCheck="false"
-            // onBlur={() => {
-            //   setIsSearchFocused(false);
-            // }}
           />
         </form>
         {isSearchFocused && isSearchQuery && (
-          <ul className="dropdown relative z-20 h-auto max-h-64 w-[35rem] mt-4 rounded-lg mr-[1.27rem] bg-[rgba(255,255,255,.2)] overflow-y-scroll ">
+          <ul className="dropdown absolute top-[5.5rem] z-20 h-auto max-h-64 w-[35rem] mt-4 rounded-lg mr-[1.27rem] bg-[#242121cb] overflow-y-scroll ">
             {isDataLoaded ? (
               books.map((book, index) => (
                 <li

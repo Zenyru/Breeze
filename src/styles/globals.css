@@ -43,16 +43,19 @@ a {
 } */
 
 
+
 .dropdown::-webkit-scrollbar {
   width: 16px;
   background-color: transparent;
 }
+
 .dropdown::-webkit-scrollbar-thumb {
   border: 5px solid rgba(0, 0, 0, 0);
   background-clip: padding-box;
   border-radius: 9999px;
   background-color: #aaaaaa94;
 }
+
 .dropdown::-webkit-scrollbar-thumb:hover {
   border: 5px solid rgba(0, 0, 0, 0);
   background-clip: padding-box;

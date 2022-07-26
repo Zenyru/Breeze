@@ -1,0 +1,26 @@
+
+.bookContainerScroll{
+    overflow-y: scroll;
+    height: 100%;
+}
+
+
+.bookContainerScroll::-webkit-scrollbar {
+  width: 16px;
+  background-color: transparent;
+}
+
+.bookContainerScroll::-webkit-scrollbar-thumb {
+  border: 5px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  border-radius: 9999px;
+  background-color: #aaaaaa94;
+}
+
+.bookContainerScroll::-webkit-scrollbar-thumb:hover {
+  border: 5px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  border-radius: 9999px;
+  background-color: #aaaaaa;
+}
+
