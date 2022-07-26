@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 export default async function searchQuery(req, res) {
   if (req.method === "GET") {
     return res.status(405).json({ message: "Method is not accepted" });
@@ -14,14 +13,16 @@ export default async function searchQuery(req, res) {
             q: search.toLowerCase(),
             key: process.env.GOOGLE_API_KEY,
           },
-        
         }
       );
 
       return res.status(200).json({
         message: data.items.map(book => {
           return {
-            imageLink: book.volumeInfo.imageLinks?.thumbnail ?? "https://via.placeholder.com/128x193",
+            id: book.id,
+            imageLink:
+              book.volumeInfo.imageLinks?.thumbnail ??
+              "https://via.placeholder.com/128x193",
             title: book.volumeInfo.title,
           };
         }),

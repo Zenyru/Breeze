@@ -40,8 +40,9 @@ model Session {
 }
 
 model Books {
-  id        String  @id @default(cuid())
+  bookId        String  @id @default(cuid())
   title       String
+  image       String?
   userId     String
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

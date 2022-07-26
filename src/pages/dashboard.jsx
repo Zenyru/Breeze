@@ -1,15 +1,28 @@
-import { getSession } from "next-auth/react";
+import { getSession, signOut } from "next-auth/react";
 import prisma from "../lib/prisma";
 import Logo from "../components/Logo";
 import Input from "../components/Input";
+import { FiLogOut } from "react-icons/fi";
 
 export default function dashboard({ user }) {
   return (
     <div className="min-h-screen bg-black">
       <div className="pt-4 flex justify-between">
         <Logo />
-        <div  className="absolute top-5 right-0  h-10 w-10 rounded-full mr-8 overflow-hidden">
-          <img src= {user.image} alt="user avatar" />
+        <div
+          onClick={() => {
+            signOut({
+              callbackUrl: "/",
+            });
+          }}
+          className="mr-6 py-2 px-4 bg-[rgba(255,255,255,0.92)] rounded-sm cursor-pointer hover:translate-y-[-0.09rem] transition-all duration-300 "
+        >
+          <a className="text-[rgba(0,0,0,0.8  )] font-semibold flex items-center">
+            <span className="mr-2">
+              <FiLogOut />
+            </span>
+            Logout
+          </a>
         </div>
       </div>
       <h1 className="text-white text-center font-bold text-2xl">
@@ -26,13 +39,6 @@ export default function dashboard({ user }) {
 
 export const getServerSideProps = async ctx => {
   const session = await getSession(ctx);
-
-  const user = await prisma.user.findUnique({
-    where: {
-      id: session.user.id,
-    },
-  });
-
   if (!session) {
     return {
       redirect: {
@@ -41,6 +47,12 @@ export const getServerSideProps = async ctx => {
       },
     };
   }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      id: session.user.id,
+    },
+  });
 
   return {
     props: {

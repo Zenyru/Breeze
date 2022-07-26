@@ -8,7 +8,6 @@ import { useOutsideClick } from "rooks";
 export default function Input() {
   const [books, setBooks] = useState([]);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [addedBooks, setAddedBooks] = useState([]);
   const [isSearchQuery, setIsSearchQuery] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isThereData, setIsThereData] = useState(false);
@@ -46,21 +45,80 @@ export default function Input() {
     }
   };
 
-  const listItemClicked = (e, key) => {
+  const listItemClicked = async (key, id) => {
     const itemClicked = document.querySelector(".dropdown").childNodes[key];
-    if (!addedBooks.includes(itemClicked)) {
-      console.log(addedBooks);
-      setAddedBooks(itemClicked);
+    const itemImage = itemClicked.querySelector("img");
+    try {
       setIsSearchFocused(false);
-    } else {
-      Toastify({
-        text: "Book is already added",
-        className: "repeat ",
-        style: {
-          background: "linear-gradient(to right, #A8EB12, #2CD261)",
-        },
-      }).showToast();
+      document.querySelector(".search-input").value = "";
+
+      const { data } = await axios.post("/api/addBooks", {
+        bookId: itemClicked.id,
+        title: itemClicked.innerText,
+        image: itemImage.src,
+      });
+      if (data.success) {
+
+        Toastify({
+          text: "Book is added successfully",
+          duration: 2000,
+          style: {
+            color: "white",
+            textAlign: "center",
+            background:
+              "linear-gradient(to right,rgb(0, 176, 155), rgb(150, 201, 61))",
+            height: "2.3rem",
+            width: "15rem",
+            padding: ".25rem",
+            position: "absolute",
+            left: "0",
+            right: "0",
+            margin: "0 auto",
+          },
+        }).showToast();
+      }
+      
+      // else if (!data.success && data.message )
+
+    } catch (error) {
+      if(error.response.data.message){
+        Toastify({
+          text: "Book is already added",
+          duration: 2000,
+          style: {
+            color: "white",
+            textAlign: "center",
+            background:
+              "linear-gradient(to right,rgb(0, 176, 155), rgb(150, 201, 61))",
+            height: "2.3rem",
+            width: "15rem",
+            padding: ".25rem",
+            position: "absolute",
+            left: "0",
+            right: "0",
+            margin: "0 auto",
+          },
+        }).showToast();
+  
+      }
+      
     }
+
+    // if (!addedBooks.includes(itemClicked.id)) {
+    //   addedBooks.push(itemClicked);
+    //   console.log(addedBooks);
+    //
+
+    // } else if(addedBooks.includes(itemClicked.id)) {
+    //   Toastify({
+    //     text: "Book is already added",
+    //     duration: 3000,
+    //     style: {
+    //       background: "linear-gradient(to right, #A8EB12, #2CD261)",
+    //       position: "absolute",
+    //     },
+    //   }).showToast();
+    // }
   };
 
   const clickedOutside = () => {
@@ -74,7 +132,6 @@ export default function Input() {
 
   return (
     <div className="flex justify-center items-center flex-col relative">
-
       <div ref={ref} className="flex flex-col items-center ">
         <form
           onSubmit={e => e.preventDefault()}
@@ -103,8 +160,9 @@ export default function Input() {
               books.map((book, index) => (
                 <li
                   key={index}
+                  id={book.id}
                   className="list-element text-white text-lg p-2 border-b-[1px] cursor-pointer border-gray-700 first:pt-2 last:pb-2 flex items-center hover:bg-[rgba(51,65,81,0.57)] "
-                  onClick={e => listItemClicked(e, index)}
+                  onClick={e => listItemClicked(index, book.id)}
                 >
                   <img className="mr-8" src={book.imageLink} />
                   <p>{book.title}</p>
