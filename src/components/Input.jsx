@@ -14,19 +14,20 @@ export default function Input({ passingData }) {
   const [bookInfo, setBookInfo] = useState([]);
 
   const ref = useRef();
+  const inputRef = useRef(null);
 
   useEffect(() => {
     try {
       axios.get("/api/addBooks").then(res => {
-        setBookInfo((res.data));
-        
+        setBookInfo(res.data);
+        passingData(res.data);
       });
     } catch (error) {
       console.log(error);
     }
   }, []);
 
-  passingData(bookInfo);
+ 
 
   const handleChange = async e => {
     if (e.target.value.length === 0) {
@@ -59,12 +60,12 @@ export default function Input({ passingData }) {
     }
   };
 
-  const listItemClicked = async (key, id) => {
+  const listItemClicked = async (e, key, id) => {
     const itemClicked = document.querySelector(".dropdown").childNodes[key];
     const itemImage = itemClicked.querySelector("img");
     try {
-      document.querySelector(".search-input").value = "";
       setIsSearchFocused(false);
+      inputRef.current.value = "";
 
       const { data } = await axios.post("/api/addBooks", {
         bookId: itemClicked.id,
@@ -74,7 +75,7 @@ export default function Input({ passingData }) {
 
       if (data) {
         setBookInfo([...bookInfo, data]);
-        passingData(bookInfo);
+        passingData([...bookInfo,data]);
 
         Toastify({
           text: "Book is added successfully",
@@ -134,6 +135,7 @@ export default function Input({ passingData }) {
         >
           <HiOutlineSearch className="text-zinc-400 text-2xl left-[34rem] " />
           <DebounceInput
+            ref={inputRef}
             className="search-input w-[90%] ml-[-2.8rem] inline-block  pl-14 py-4 rounded-lg  placeholder:text-lg  bg-[rgba(255,255,255,.2)] focus:outline-none focus:caret-[#2CD261] text-white  focus:w-[100%] transition-all duration-200 ease-in-out relative z-20"
             type="text"
             debounceTimeout={500}
@@ -154,7 +156,7 @@ export default function Input({ passingData }) {
                   key={index}
                   id={book.id}
                   className="list-element text-white text-lg p-2 border-b-[1px] cursor-pointer border-gray-700 first:pt-2 last:pb-2 flex items-center hover:bg-[rgba(51,65,81,0.57)] "
-                  onClick={e => listItemClicked(index, book.id)}
+                  onClick={e => listItemClicked(e, index, book.id)}
                 >
                   <img className="mr-8" src={book.imageLink} />
                   <p>{book.title}</p>

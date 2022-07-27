@@ -10,7 +10,6 @@ export default function dashboard({ user }) {
   const [booksInfo, setBooksInfo] = useState([]);
 
   const inputToDashboard = dataFromInput => {
-    console.log(dataFromInput);
     setBooksInfo(dataFromInput);
   };
 
