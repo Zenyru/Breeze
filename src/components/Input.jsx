@@ -5,7 +5,10 @@ import { useState, useRef, useEffect } from "react";
 import Toastify from "toastify-js";
 import { useOutsideClick } from "rooks";
 
-export default function Input({ passingData }) {
+export default function Input({
+  passingData,
+  setFiltered,
+}) {
   const [books, setBooks] = useState([]);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isSearchQuery, setIsSearchQuery] = useState(false);
@@ -17,6 +20,10 @@ export default function Input({ passingData }) {
   const inputRef = useRef(null);
 
   useEffect(() => {
+    setBookInfo(setFiltered);
+  }, [setFiltered]);
+
+  useEffect(() => {
     try {
       axios.get("/api/addBooks").then(res => {
         setBookInfo(res.data);
@@ -26,8 +33,6 @@ export default function Input({ passingData }) {
       console.log(error);
     }
   }, []);
-
- 
 
   const handleChange = async e => {
     if (e.target.value.length === 0) {
@@ -75,8 +80,9 @@ export default function Input({ passingData }) {
 
       if (data) {
         setBookInfo([...bookInfo, data]);
-        passingData([...bookInfo,data]);
+        passingData([...bookInfo, data]);
 
+        console.log("passingData", [...bookInfo, data]);
         Toastify({
           text: "Book is added successfully",
           duration: 2000,
@@ -137,7 +143,7 @@ export default function Input({ passingData }) {
           <DebounceInput
             ref={inputRef}
             className="search-input w-[90%] ml-[-2.8rem] inline-block  pl-14 py-4 rounded-lg  placeholder:text-lg  bg-[rgba(255,255,255,.2)] focus:outline-none focus:caret-[#2CD261] text-white  focus:w-[100%] transition-all duration-200 ease-in-out relative z-20"
-            type="text"
+            // type="text"
             debounceTimeout={500}
             onChange={handleChange}
             placeholder="Search For Books..."

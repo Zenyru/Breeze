@@ -7,8 +7,10 @@ import ColoredDivs from "../components/ColoredDivs";
 export default function Home() {
   return (
     <section className="homeSection min-h-screen bg-black">
+    {/* Nav bar */}
       <Nav />
       <div className="homePage flex flex-col items-center relative max-w-7xl mx-auto">
+      {/* some colored divs used for decoration */}
         <ColoredDivs />
 
         <p className="text-white text-7xl mt-24 text-center font-extrabold relative z-10">
@@ -32,6 +34,7 @@ export default function Home() {
   );
 }
 
+// getting the session from the server
 export const getServerSideProps = async ctx => {
   return {
     props: {

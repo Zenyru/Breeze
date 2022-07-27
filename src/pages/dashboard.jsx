@@ -8,10 +8,12 @@ import { useState } from "react";
 
 export default function dashboard({ user }) {
   const [booksInfo, setBooksInfo] = useState([]);
+  const [withoutDeletedBook, setWithoutDeletedBook] = useState([]);
 
   const inputToDashboard = dataFromInput => {
     setBooksInfo(dataFromInput);
   };
+
 
   return (
     <div className="min-h-screen bg-black">
@@ -40,8 +42,8 @@ export default function dashboard({ user }) {
         </span>{" "}
         ! Welcome to your dashboard.
       </h1>
-      <Input passingData={inputToDashboard} />
-      <BookContainer info={booksInfo} />
+      <Input passingData={inputToDashboard} setFiltered={withoutDeletedBook}  />
+      <BookContainer settingFiltered={setWithoutDeletedBook} info={booksInfo} />
     </div>
   );
 }

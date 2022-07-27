@@ -31,5 +31,10 @@ export default async function searchQuery(req, res) {
       console.log(error);
       return res.status(400).json({ message: error.message });
     }
+  }else{
+    res.status(400).json({
+      status: "error",
+      message: "Invalid request",
+    });
   }
 }
