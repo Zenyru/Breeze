@@ -8,7 +8,7 @@ export default async function deleteBook(req, res) {
   if (!session) {
     return res.status(401).json({ message: "Unauthorized" });
   }
-
+  // deleting the book from the database
   if (req.method === "DELETE") {
     try {
       const {bookId} = req.query;

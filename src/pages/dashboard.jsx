@@ -43,15 +43,19 @@ export default function dashboard({ user }) {
         </span>{" "}
         ! Welcome to your dashboard.
       </h1>
-      {/* passing a function called inputToDashboard and filtered */}
+      {/* passing a function called inputToDashboard(which is there in above) to get the data about and an array called filtered without the deleted books as props  */}
       <Input passingData={inputToDashboard} filtered={withoutDeletedBook}  />
+      
+      {/* passing the setWithoutDeletedBook as props  as settingFiltered and info which is basically the data about the new newly added books  by the user that is comming from the input.jsx as props */}
       <BookContainer settingFiltered={setWithoutDeletedBook} info={booksInfo} />
     </div>
   );
 }
 
 export const getServerSideProps = async ctx => {
+  // getting the session from the server
   const session = await getSession(ctx);
+  // checking if the user is logged in , if not returning them back to the home page
   if (!session) {
     return {
       redirect: {

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 export default function BookContainer({ settingFiltered,info }) {
   const [books, setBooks] = useState([]);
 
+  // adding info to the books state when ever there is a change in the info 
   useEffect(() => {
     try {
       setBooks(info);
@@ -17,10 +18,13 @@ export default function BookContainer({ settingFiltered,info }) {
     }
   }, [info]);
 
+  // deleting the book from the database
   const deleteBook = async bookId => {
     try {
       const { data } = await axios.delete(`/api/books/${bookId}`);
+      // adding the filtered books without the deleted book to the books state
       setBooks(books.filter(book => book.bookId !== bookId));
+      // passing the filtered books without the deleted book to the parent component
       settingFiltered(books.filter(book => book.bookId !== bookId));
 
       if (data) {
@@ -51,6 +55,7 @@ export default function BookContainer({ settingFiltered,info }) {
     <div className="text-white  flex justify-center relative z-0  ">
       <div className=" w-[50rem] h-[28rem] bg-[#ffffff36] mt-12 rounded-lg ">
         <ul className={styles.bookContainerScroll}>
+        {/* mapping the book array in to list items */}
           {books
             ? books.map((book, index) => {
                 return (

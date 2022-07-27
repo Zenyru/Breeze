@@ -18,11 +18,12 @@ export default function Input({
 
   const ref = useRef();
   const inputRef = useRef(null);
-
+// whenever there is a change in filtered array(which happens when the user deletes the book) , the books array is set to the filtered array
   useEffect(() => {
     setBookInfo(filtered);
   }, [filtered]);
 
+  // getting the initial data from the database
   useEffect(() => {
     try {
       axios.get("/api/addBooks").then(res => {
@@ -44,6 +45,7 @@ export default function Input({
       setBooks([]);
       try {
         setIsDataLoaded(false);
+        // getting the data from the API
         const { data } = await axios.post("/api/search", {
           search: e.target.value,
         });
@@ -71,7 +73,7 @@ export default function Input({
     try {
       setIsSearchFocused(false);
       inputRef.current.value = "";
-
+      // creating a new book in the database
       const { data } = await axios.post("/api/addBooks", {
         bookId: itemClicked.id,
         title: itemClicked.innerText,
@@ -80,6 +82,7 @@ export default function Input({
 
       if (data) {
         setBookInfo([...bookInfo, data]);
+        // passing the data to the parent component
         passingData([...bookInfo, data]);
 
         console.log("passingData", [...bookInfo, data]);
