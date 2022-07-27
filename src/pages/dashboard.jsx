@@ -19,6 +19,7 @@ export default function dashboard({ user }) {
     <div className="min-h-screen bg-black">
       <div className="pt-4 flex justify-between">
         <Logo />
+        {/* sign out  */}
         <div
           onClick={() => {
             signOut({
@@ -42,7 +43,8 @@ export default function dashboard({ user }) {
         </span>{" "}
         ! Welcome to your dashboard.
       </h1>
-      <Input passingData={inputToDashboard} setFiltered={withoutDeletedBook}  />
+      {/* passing a function called inputToDashboard and filtered */}
+      <Input passingData={inputToDashboard} filtered={withoutDeletedBook}  />
       <BookContainer settingFiltered={setWithoutDeletedBook} info={booksInfo} />
     </div>
   );

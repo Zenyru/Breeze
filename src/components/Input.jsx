@@ -7,7 +7,7 @@ import { useOutsideClick } from "rooks";
 
 export default function Input({
   passingData,
-  setFiltered,
+  filtered,
 }) {
   const [books, setBooks] = useState([]);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -20,8 +20,8 @@ export default function Input({
   const inputRef = useRef(null);
 
   useEffect(() => {
-    setBookInfo(setFiltered);
-  }, [setFiltered]);
+    setBookInfo(filtered);
+  }, [filtered]);
 
   useEffect(() => {
     try {
