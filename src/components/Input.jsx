@@ -69,15 +69,13 @@ export default function Input({
 
   const listItemClicked = async (e, key, id) => {
     const itemClicked = document.querySelector(".dropdown").childNodes[key];
-    const itemImage = itemClicked.querySelector("img");
+    // const itemImage = itemClicked.querySelector("img");
     try {
       setIsSearchFocused(false);
       inputRef.current.value = "";
       // creating a new book in the database
       const { data } = await axios.post("/api/addBooks", {
         bookId: itemClicked.id,
-        title: itemClicked.innerText,
-        image: itemImage.src,
       });
 
       if (data) {
@@ -85,7 +83,7 @@ export default function Input({
         // passing the data to the parent component
         passingData([...bookInfo, data]);
 
-        console.log("passingData", [...bookInfo, data]);
+        // console.log("passingData", [...bookInfo, data]);
         Toastify({
           text: "Book is added successfully",
           duration: 2000,
