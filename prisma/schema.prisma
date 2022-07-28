@@ -40,13 +40,13 @@ model Session {
 }
 
 model Books {
-  bookId        String  @id @default(cuid())
-  title       String
-  image       String?
-  userId     String
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id     String     @id @default(cuid())
+  bookId String 
+  title  String
+  image  String?
+  userId String
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
-
 
 model User {
   id            String    @id @default(cuid())

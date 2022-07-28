@@ -1,6 +1,6 @@
 
 .bookContainerScroll{
-    overflow-y: scroll;
+    overflow-y: scroll  ;
     height: 100%;
 }
 
@@ -9,6 +9,7 @@
   width: 16px;
   background-color: transparent;
 }
+
 
 .bookContainerScroll::-webkit-scrollbar-thumb {
   border: 5px solid rgba(0, 0, 0, 0);

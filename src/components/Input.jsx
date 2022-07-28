@@ -69,7 +69,7 @@ export default function Input({
 
   const listItemClicked = async (e, key, id) => {
     const itemClicked = document.querySelector(".dropdown").childNodes[key];
-    // const itemImage = itemClicked.querySelector("img");
+    
     try {
       setIsSearchFocused(false);
       inputRef.current.value = "";

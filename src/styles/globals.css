@@ -11,6 +11,11 @@
   }
 }
 
+:root {
+  color-scheme: dark;
+}
+
+
 html,
 body {
   padding: 0;
@@ -18,6 +23,10 @@ body {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 a {
@@ -29,20 +38,29 @@ a {
   box-sizing: border-box;
 }
 
-/* .dropdown::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 16px;
   background-color: transparent;
 }
-
-.dropdown::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
+  border: 5px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  border-radius: 9999px;
   background-color: #aaaaaa94;
+} */
+/* 
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.673);
 }
 
-.dropdown::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
+  border: 5px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  border-radius: 9999px;
   background-color: #aaaaaa;
 } */
-
-
 
 .dropdown::-webkit-scrollbar {
   width: 16px;

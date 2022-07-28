@@ -3441,6 +3441,11 @@ react-indiana-drag-scroll@^2.1.0:
     debounce "^1.2.0"
     easy-bem "^1.1.1"
 
+react-intersection-observer@^9.4.0:
+  version "9.4.0"
+  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-9.4.0.tgz#f6b6e616e625f9bf255857c5cba9dbf7b1825ec7"
+  integrity sha512-v0403CmomOVlzhqFXlzOxg0ziLcVq8mfbP0AwAcEQWgZmR2OulOT79Ikznw4UlB3N+jlUYqLMe4SDHUOyp0t2A==
+
 react-is@^16.13.1:
   version "16.13.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
@@ -3455,6 +3460,13 @@ react-merge-refs@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-merge-refs/-/react-merge-refs-1.1.0.tgz#73d88b892c6c68cbb7a66e0800faa374f4c38b06"
   integrity sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==
+
+react-rough-notation@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-rough-notation/-/react-rough-notation-1.0.2.tgz#c558c710ffcc09c01d4ec9d35e68883f8908304d"
+  integrity sha512-nS3u90cZMQrOSzUbut28nrVgc1ixMaclDloqGi1Sw5BiY3DQNQPL8cVbIVoKUxwSiWugVM5GPf9ubL/h/avoKw==
+  dependencies:
+    rough-notation "^0.4.0"
 
 react-transition-group@^4.4.2:
   version "4.4.2"
@@ -3590,6 +3602,11 @@ rooks@^5.14.0:
   dependencies:
     lodash.debounce "^4.0.8"
     raf "^3.4.1"
+
+rough-notation@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/rough-notation/-/rough-notation-0.4.0.tgz#6f97324cb50fc91ec8064219253aa2528a69210f"
+  integrity sha512-hDgn9qMIxWnfY+WWjt30aLMtDHR13H8r/NI3EQNdJiEFAzpklH5nKg4eH/thpxCWTYzyg8ueMsKIfz9MzOBQ4Q==
 
 run-async@^2.4.0:
   version "2.4.1"

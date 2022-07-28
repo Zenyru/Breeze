@@ -15,7 +15,7 @@ export default async function deleteBook(req, res) {
 
       const deletingBook = await prisma.books.delete({
         where: {
-          bookId: bookId,
+          id: bookId,
         },
       
       });

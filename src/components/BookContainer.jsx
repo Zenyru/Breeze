@@ -23,9 +23,9 @@ export default function BookContainer({ settingFiltered, info }) {
     try {
       const { data } = await axios.delete(`/api/books/${bookId}`);
       // adding the filtered books without the deleted book to the books state
-      setBooks(books.filter(book => book.bookId !== bookId));
+      setBooks(books.filter(book => book.id !== bookId));
       // passing the filtered books without the deleted book to the parent component
-      settingFiltered(books.filter(book => book.bookId !== bookId));
+      settingFiltered(books.filter(book => book.id !== bookId));
 
       if (data) {
         Toastify({
@@ -79,7 +79,7 @@ export default function BookContainer({ settingFiltered, info }) {
                         contentColor="default"
                       >
                         <HiMinusCircle
-                          onClick={() => deleteBook(book.bookId)}
+                          onClick={() => deleteBook(book.id)}
                           className="text-3xl text-[#ffffff88] cursor-pointer"
                         />
                       </Tooltip>

@@ -27,29 +27,31 @@ export default async function addedBooks(req, res) {
 
     try {
       // checking if the book is already in the database
-      const dataExists = await prisma.books.findUnique({
+      const dataExists = await prisma.books.findFirst({  
         where: {
           bookId: bookId,
+          userId: session.user.id,
         },
       });
 
       if (dataExists) {
         return res.status(400).json({ message: "Book already exists" });
       } else if (!dataExists) {
+        console.log("book does not exist");
         const { data } = await axios.get(
           "https://www.googleapis.com/books/v1/volumes",
           {
             params: {
               q: bookId,
               key: process.env.GOOGLE_API_KEY,
-              maxResults: 1,
             },
           }
         );
-        const id = data.items[0].id;
-        const title = data.items[0].volumeInfo.title;
+        const filtered = data.items.filter(book => book.id === bookId);
+        const id = filtered[0].id;
+        const title = filtered[0].volumeInfo.title;
         const image =
-          data.items[0].volumeInfo.imageLinks?.thumbnail ??
+          filtered[0].volumeInfo.imageLinks?.thumbnail ??
           "https://via.placeholder.com/128x193";
 
         // creating a new book in the database
