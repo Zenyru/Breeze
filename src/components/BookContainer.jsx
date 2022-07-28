@@ -6,10 +6,10 @@ import { Tooltip } from "@nextui-org/react";
 import Toastify from "toastify-js";
 import { useEffect, useState } from "react";
 
-export default function BookContainer({ settingFiltered,info }) {
+export default function BookContainer({ settingFiltered, info }) {
   const [books, setBooks] = useState([]);
 
-  // adding info to the books state when ever there is a change in the info 
+  // adding info to the books state when ever there is a change in the info
   useEffect(() => {
     try {
       setBooks(info);
@@ -53,9 +53,11 @@ export default function BookContainer({ settingFiltered,info }) {
 
   return (
     <div className="text-white  flex justify-center relative z-0  ">
+      <div className="h-48 w-48 rounded-xl blur-3xl animate-bounce-slow absolute left-[3rem] bottom-[-6rem] bg-[rgba(166,235,18,0.24)] mb-10"></div>
+      <div className="h-48 w-48 rounded-xl blur-3xl animate-bounce-slow absolute right-10 top-[5rem] bg-[rgba(44,210,97,0.24)]"></div>
       <div className=" w-[50rem] h-[28rem] bg-[#ffffff36] mt-12 rounded-lg ">
         <ul className={styles.bookContainerScroll}>
-        {/* mapping the book array in to list items */}
+          {/* mapping the book array in to list items */}
           {books
             ? books.map((book, index) => {
                 return (
