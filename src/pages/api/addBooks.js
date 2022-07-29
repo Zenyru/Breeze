@@ -31,7 +31,6 @@ export default async function addedBooks(req, res) {
       if (dataExists) {
         return res.status(400).json({ message: "Book already exists" });
       } else if (!dataExists) {
-        console.log("book does not exist");
         const { data } = await axios.get(
           "https://www.googleapis.com/books/v1/volumes",
           {
