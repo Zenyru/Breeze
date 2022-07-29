@@ -4,11 +4,11 @@ import { AiOutlineDown } from "react-icons/ai";
 
 export default function IntroSection() {
   return (
-    <div className="homePage flex flex-col items-center h-[90vh]  relative max-w-7xl mx-auto">
+    <div className="homePage flex flex-col items-center h-[90vh] relative max-w-7xl mx-auto">
       {/* some colored divs used for decoration */}
       <ColoredDivs />
 
-      <p className="text-white text-7xl md:text-6xl sm:text-5xl xxs:mt-12  mt-24 text-center font-extrabold relative z-10">
+      <p className="text-white  text-7xl md:text-6xl sm:text-5xl xxs:mt-12  mt-24 text-center font-extrabold relative z-10">
         The{" "}
         <span className="bg-gradient-to-r from-[#A8EB12,65%] to-[#2CD261] text-gradient p-1 ">
           Best

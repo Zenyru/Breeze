@@ -6,7 +6,7 @@ import { getSession } from "next-auth/react";
 
 export default function Home() {
   return (
-    <section className="homeSection  dark bg-black">
+    <section className="homeSection  dark mx-auto bg-black">
       <Nav />
       <IntroSection />
       <Advantages />

@@ -15,7 +15,7 @@ export default function dashboard({ user, books }) {
   };
 
   return (
-    <div className="min-h-screen xs:w-fit  bg-black">
+    <div className="min-h-screen xs:w-fit relative bg-black">
       <div className="pt-4 flex justify-between">
         <Logo />
         {/* sign out  */}
