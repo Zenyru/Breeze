@@ -15,7 +15,7 @@ export default function dashboard({ user, books }) {
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen xs:w-fit  bg-black">
       <div className="pt-4 flex justify-between">
         <Logo />
         {/* sign out  */}
@@ -35,7 +35,7 @@ export default function dashboard({ user, books }) {
           </a>
         </div>
       </div>
-      <h1 className="text-white text-center font-bold text-2xl">
+      <h1 className="text-white text-center font-bold text-2xl lg:mt-8 xxs:mt-14">
         Hi{" "}
         <span className="bg-gradient-to-r from-[#A8EB12] to-[#2CD261] text-gradient">
           {user.name}

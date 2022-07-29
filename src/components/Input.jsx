@@ -133,12 +133,12 @@ export default function Input({
       <div ref={ref} className="flex flex-col items-center relative">
         <form
           onSubmit={e => e.preventDefault()}
-          className="relative flex mt-8 justify-center items-center w-[35rem] "
+          className="relative flex mt-8  justify-center items-center w-[35rem] sm:ml-6 sm:w-[30rem] "
         >
           <HiOutlineSearch className="text-zinc-400 text-2xl left-[34rem] " />
           <DebounceInput
             ref={inputRef}
-            className="search-input w-[90%] ml-[-2.8rem] inline-block  pl-14 py-4 rounded-lg  placeholder:text-lg  bg-[rgba(255,255,255,.2)] focus:outline-none focus:caret-[#2CD261] text-white  focus:w-[100%] transition-all duration-200 ease-in-out relative z-20"
+            className="search-input  w-[90%] ml-[-2.8rem] inline-block  pl-14 py-4 rounded-lg  placeholder:text-lg  bg-[rgba(255,255,255,.2)] focus:outline-none focus:caret-[#2CD261] text-white  focus:w-[100%] transition-all duration-200 ease-in-out relative z-20"
             // type="text"
             debounceTimeout={500}
             onChange={handleChange}
@@ -151,7 +151,7 @@ export default function Input({
           />
         </form>
         {isSearchFocused && isSearchQuery && (
-          <ul className="dropdown absolute top-[5.5rem] z-20 h-auto max-h-64 w-[35rem] mt-4 rounded-lg mr-[1.27rem] bg-[#242121cb] overflow-y-scroll ">
+          <ul className="dropdown absolute top-[5.5rem] z-20 h-auto max-h-64 w-[35rem] sm:w-[30rem] sm:ml-6 xxs:w-[28rem] mt-4 rounded-lg mr-[1.27rem] bg-[#242121cb] overflow-y-scroll ">
             {isDataLoaded ? (
               books.map((book, index) => (
                 <li
