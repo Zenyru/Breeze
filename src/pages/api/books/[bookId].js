@@ -25,7 +25,7 @@ export default async function deleteBook(req, res) {
       return res.status(400).json({ message: error.message });
     }
   }else{
-    res.status(400).json({
+    res.status(405).json({
       status: "error",
       message: "Invalid request",
     });

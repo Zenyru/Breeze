@@ -3,7 +3,10 @@ import axios from "axios";
 export default async function searchQuery(req, res) {
   // handling the get request
   if (req.method === "GET") {
-    return res.status(405).json({ message: "Method is not accepted" });
+    return res.status(405).json({
+      status: "error",
+      message: "Invalid request",
+    });
   } else if (req.method === "POST") {
     // handling the post request
     let search = req.body.search;
@@ -18,7 +21,7 @@ export default async function searchQuery(req, res) {
           },
         }
       );
-        // returning the data to the client
+      // returning the data to the client
       return res.status(200).json({
         message: data.items.map(book => {
           return {
@@ -34,8 +37,8 @@ export default async function searchQuery(req, res) {
       console.log(error);
       return res.status(400).json({ message: error.message });
     }
-  }else{
-    res.status(400).json({
+  } else {
+    return res.status(405).json({
       status: "error",
       message: "Invalid request",
     });

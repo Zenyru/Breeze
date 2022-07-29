@@ -6,14 +6,13 @@ import BookContainer from "../components/BookContainer";
 import { FiLogOut } from "react-icons/fi";
 import { useState } from "react";
 
-export default function dashboard({ user }) {
+export default function dashboard({ user, books }) {
   const [booksInfo, setBooksInfo] = useState([]);
   const [withoutDeletedBook, setWithoutDeletedBook] = useState([]);
 
   const inputToDashboard = dataFromInput => {
     setBooksInfo(dataFromInput);
   };
-
 
   return (
     <div className="min-h-screen bg-black">
@@ -44,8 +43,12 @@ export default function dashboard({ user }) {
         ! Welcome to your dashboard.
       </h1>
       {/* passing a function called inputToDashboard(which is there in above) to get the data about and an array called filtered without the deleted books as props  */}
-      <Input passingData={inputToDashboard} filtered={withoutDeletedBook}  />
-      
+      <Input
+        initialBooks={books}
+        passingData={inputToDashboard}
+        filtered={withoutDeletedBook}
+      />
+
       {/* passing the setWithoutDeletedBook as props  as settingFiltered and info which is basically the data about the new newly added books  by the user that is comming from the input.jsx as props */}
       <BookContainer settingFiltered={setWithoutDeletedBook} info={booksInfo} />
     </div>
@@ -71,10 +74,17 @@ export const getServerSideProps = async ctx => {
     },
   });
 
+  const books = await prisma.books.findMany({
+    where: {
+      userId: session.user.id,
+    },
+  });
+
   return {
     props: {
       session,
       user,
+      books,
     },
   };
 };

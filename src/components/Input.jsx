@@ -8,6 +8,7 @@ import { useOutsideClick } from "rooks";
 export default function Input({
   passingData,
   filtered,
+  initialBooks,
 }) {
   const [books, setBooks] = useState([]);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -25,14 +26,8 @@ export default function Input({
 
   // getting the initial data from the database
   useEffect(() => {
-    try {
-      axios.get("/api/addBooks").then(res => {
-        setBookInfo(res.data);
-        passingData(res.data);
-      });
-    } catch (error) {
-      console.log(error);
-    }
+      setBookInfo(initialBooks);
+      passingData(initialBooks);
   }, []);
 
   const handleChange = async e => {
