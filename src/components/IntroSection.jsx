@@ -4,7 +4,7 @@ import { AiOutlineDown } from "react-icons/ai";
 
 export default function IntroSection() {
   return (
-    <div className="homePage flex flex-col items-center h-[90vh] relative max-w-7xl mx-auto">
+    <div className="homePage flex flex-col items-center min-h-[90vh] relative max-w-7xl mx-auto">
       {/* some colored divs used for decoration */}
       <ColoredDivs />
 

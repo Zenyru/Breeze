@@ -11,7 +11,7 @@ export default function Advantages() {
   });
 
   return (
-    <div className=" relative  max-w-7xl mx-auto ">
+    <div className=" relative min-h-[80vh] max-w-7xl mx-auto ">
       <div className="h-48 w-48 rounded-xl blur-3xl animate-bounce-slow absolute left-[1rem]  bottom-[20rem] bg-[rgba(166,235,18,0.25)] mb-10"></div>
       <div className="h-48 w-48 rounded-xl blur-3xl animate-bounce-slow absolute right-[8rem] md:right-7 md:bottom-[40rem] bottom-[28rem] bg-[rgba(44,210,97,0.25)]"></div>
       <div className="flex items-center flex-col relative z-10 ">
