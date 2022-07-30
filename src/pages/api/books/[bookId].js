@@ -11,20 +11,35 @@ export default async function deleteBook(req, res) {
   // deleting the book from the database
   if (req.method === "DELETE") {
     try {
-      const {bookId} = req.query;
+      const { bookId } = req.query;
 
       const deletingBook = await prisma.books.delete({
         where: {
           id: bookId,
         },
-      
       });
       return res.status(200).json(deletingBook, { success: true });
-
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }
-  }else{
+  } else if (req.method === "POST") {
+    let { bookId } = req.query;
+    let currentPage = req.body.currentPage;
+
+    try {
+      const addingCurrentPage = await prisma.books.update({
+        where: {
+          id: bookId,
+        },
+        data: {
+          currentPage: currentPage,
+        },
+      });
+      return res.status(200).json(addingCurrentPage, { success: true });
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  } else {
     res.status(405).json({
       status: "error",
       message: "Invalid request",

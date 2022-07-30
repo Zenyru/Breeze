@@ -2,6 +2,8 @@ import "../styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
 import { NextUIProvider } from '@nextui-org/react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function App({
 
@@ -20,6 +22,7 @@ export default function App({
         <link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
       </Head>
       <Component {...pageProps} />
+      <ToastContainer className="toast-container" hideProgressBar={true} autoClose={3000} />  
     </SessionProvider>
     </NextUIProvider>
   );

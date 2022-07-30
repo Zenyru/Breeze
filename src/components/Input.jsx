@@ -2,8 +2,8 @@ import { HiOutlineSearch } from "react-icons/hi";
 import axios from "axios";
 import { DebounceInput } from "react-debounce-input";
 import { useState, useRef, useEffect } from "react";
-import Toastify from "toastify-js";
 import { useOutsideClick } from "rooks";
+import { toast } from "react-toastify";
 
 export default function Input({
   passingData,
@@ -16,6 +16,7 @@ export default function Input({
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isThereData, setIsThereData] = useState(false);
   const [bookInfo, setBookInfo] = useState([]);
+
 
   const ref = useRef();
   const inputRef = useRef(null);
@@ -78,44 +79,30 @@ export default function Input({
         // passing the data to the parent component
         passingData([...bookInfo, data]);
 
+        const notify = () => {
+          toast( "Book is added successfully",{
+            style:{
+              background: "linear-gradient(to right,rgb(0, 176, 155), rgb(150, 201, 61))",
+              color:"white" 
+            }
+          });
+        };
         // console.log("passingData", [...bookInfo, data]);
-        Toastify({
-          text: "Book is added successfully",
-          duration: 2000,
-          style: {
-            color: "white",
-            textAlign: "center",
-            background:
-              "linear-gradient(to right,rgb(0, 176, 155), rgb(150, 201, 61))",
-            height: "2.3rem",
-            width: "15rem",
-            padding: ".25rem",
-            position: "absolute",
-            left: "0",
-            right: "0",
-            margin: "0 auto",
-          },
-        }).showToast();
+        notify();
       }
     } catch (error) {
       if (error.response.data.message) {
-        Toastify({
-          text: "Book is already added",
-          duration: 2000,
-          style: {
-            color: "white",
-            textAlign: "center",
-            background:
-              "linear-gradient(to right,rgb(0, 176, 155), rgb(150, 201, 61))",
-            height: "2.3rem",
-            width: "15rem",
-            padding: ".25rem",
-            position: "absolute",
-            left: "0",
-            right: "0",
-            margin: "0 auto",
-          },
-        }).showToast();
+        
+  const notify = () => {
+    toast( "Book is already added",{
+      style:{
+        background: "linear-gradient(to right,rgb(0, 176, 155), rgb(150, 201, 61))",
+        color:"white" 
+      }
+    });
+  };
+        notify();
+
       } else {
         console.log(error);
       }

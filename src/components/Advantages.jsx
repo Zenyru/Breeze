@@ -61,7 +61,7 @@ export default function Advantages() {
       <div className="flex justify-center md:pb-20 ">
         <Button />
       </div>
-      
+       
     </div>
   );
 }

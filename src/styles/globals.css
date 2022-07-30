@@ -80,3 +80,13 @@ a {
   border-radius: 9999px;
   background-color: #aaaaaa;
 }
+
+
+@media screen and (max-width: 483px) {
+  .toast-container{
+    width: 60% !important;
+    margin-top: 1rem !important;
+    margin-left: 10.5rem !important;
+  }
+
+}

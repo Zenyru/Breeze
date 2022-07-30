@@ -47,12 +47,15 @@ export default async function addedBooks(req, res) {
           filtered[0].volumeInfo.imageLinks?.thumbnail ??
           "https://via.placeholder.com/128x193";
 
+        const pageCount = filtered[0].volumeInfo.pageCount;
+
         // creating a new book in the database
         const addingBook = await prisma.books.create({
           data: {
             bookId: id,
             title: title,
             image: image,
+            pageCount: pageCount,
 
             user: {
               connect: {

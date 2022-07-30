@@ -2,6 +2,7 @@ import styles from "../styles/Home.module.css";
 import Nav from "../components/Nav";
 import IntroSection from "../components/IntroSection";
 import Advantages from "../components/Advantages";
+import Footer from "../components/Footer";
 import { getSession } from "next-auth/react";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       <Nav />
       <IntroSection />
       <Advantages />
+      <Footer />
     </section>
   );
 }
