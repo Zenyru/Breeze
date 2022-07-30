@@ -3,6 +3,7 @@
   "rules": {
     "react-hooks/rules-of-hooks": "warn",
     "react/no-unescaped-entities": "warn",
-    "@next/next/no-html-link-for-pages": "warn"
+    "@next/next/no-html-link-for-pages": "warn",
+    "react/jsx-no-target-blank": "warn"
   }
 }
