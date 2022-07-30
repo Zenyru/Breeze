@@ -29,7 +29,7 @@ export default function Advantages() {
               className="advantages bg-gradient-to-r from-[#A8EB12] to-[#2CD261] text-gradient p-1 "
             >
               Advantages
-            </span>
+            </span>{" "}
           </RoughNotation>
           Of Breeze{" "}
         </p>
@@ -53,15 +53,13 @@ export default function Advantages() {
           <HiClock />
           <p className="text-4xl  mt-5 font-semibold">Realtime UI</p>
           <p className="text-lg  font-semibold tracking-wide text-[rgba(255,255,255,0.74)] mt-4 text-center">
-            Realtime UI update with a fun  <br /> user experience
+            Realtime UI update with a fun <br /> user experience
           </p>
         </div>
-        
       </div>
       <div className="flex justify-center md:pb-20 ">
         <Button />
       </div>
-       
     </div>
   );
 }
