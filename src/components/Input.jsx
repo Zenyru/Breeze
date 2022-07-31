@@ -4,12 +4,9 @@ import { DebounceInput } from "react-debounce-input";
 import { useState, useRef, useEffect } from "react";
 import { useOutsideClick } from "rooks";
 import { toast } from "react-toastify";
+import nProgress from "nprogress";
 
-export default function Input({
-  passingData,
-  filtered,
-  initialBooks,
-}) {
+export default function Input({ passingData, filtered, initialBooks }) {
   const [books, setBooks] = useState([]);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isSearchQuery, setIsSearchQuery] = useState(false);
@@ -17,18 +14,17 @@ export default function Input({
   const [isThereData, setIsThereData] = useState(false);
   const [bookInfo, setBookInfo] = useState([]);
 
-
   const ref = useRef();
   const inputRef = useRef(null);
-// whenever there is a change in filtered array(which happens when the user deletes the book) , the books array is set to the filtered array
+  // whenever there is a change in filtered array(which happens when the user deletes the book) , the books array is set to the filtered array
   useEffect(() => {
     setBookInfo(filtered);
   }, [filtered]);
 
   // getting the initial data from the database
   useEffect(() => {
-      setBookInfo(initialBooks);
-      passingData(initialBooks);
+    setBookInfo(initialBooks);
+    passingData(initialBooks);
   }, []);
 
   const handleChange = async e => {
@@ -65,11 +61,12 @@ export default function Input({
 
   const listItemClicked = async (e, key, id) => {
     const itemClicked = document.querySelector(".dropdown").childNodes[key];
-    
+
     try {
       setIsSearchFocused(false);
       inputRef.current.value = "";
       // creating a new book in the database
+      nProgress.start();
       const { data } = await axios.post("/api/addBooks", {
         bookId: itemClicked.id,
       });
@@ -80,11 +77,12 @@ export default function Input({
         passingData([...bookInfo, data]);
 
         const notify = () => {
-          toast( "Book is added successfully",{
-            style:{
-              background: "linear-gradient(to right,rgb(0, 176, 155), rgb(150, 201, 61))",
-              color:"white" 
-            }
+          toast("Book is added successfully", {
+            style: {
+              background:
+                "linear-gradient(to right,rgb(0, 176, 155), rgb(150, 201, 61))",
+              color: "white",
+            },
           });
         };
         // console.log("passingData", [...bookInfo, data]);
@@ -92,20 +90,21 @@ export default function Input({
       }
     } catch (error) {
       if (error.response.data.message) {
-        
-  const notify = () => {
-    toast( "Book is already added",{
-      style:{
-        background: "linear-gradient(to right,rgb(0, 176, 155), rgb(150, 201, 61))",
-        color:"white" 
-      }
-    });
-  };
+        const notify = () => {
+          toast("Book is already added", {
+            style: {
+              background:
+                "linear-gradient(to right,rgb(0, 176, 155), rgb(150, 201, 61))",
+              color: "white",
+            },
+          });
+        };
         notify();
-
       } else {
         console.log(error);
       }
+    } finally {
+      nProgress.done();
     }
   };
 

@@ -15,7 +15,6 @@
   color-scheme: dark;
 }
 
-
 html,
 body {
   padding: 0;
@@ -36,6 +35,18 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+#nprogress .spinner {
+  display: none !important;
+}
+
+#nprogress .bar {
+  background: #2CD261 !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #2CD261, 0 0 5px #A8EB12 !important;
 }
 
 /* ::-webkit-scrollbar {
@@ -81,12 +92,10 @@ a {
   background-color: #aaaaaa;
 }
 
-
 @media screen and (max-width: 483px) {
-  .toast-container{
+  .toast-container {
     width: 60% !important;
     margin-top: 1rem !important;
     margin-left: 10.5rem !important;
   }
-
 }

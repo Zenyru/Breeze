@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SingleBook from "./SingleBook";
+import nProgress from "nprogress";
 
 const notify = () => {
   toast("Book is removed successfully", {
@@ -33,6 +34,7 @@ export default function BookContainer({ settingFiltered, info }) {
   // deleting the book from the database
   const deleteBook = async bookId => {
     try {
+      nProgress.start();
       const { data } = await axios.delete(`/api/books/${bookId}`);
       // adding the filtered books without the deleted book to the books state
       setBooks(books.filter(book => book.id !== bookId));
@@ -44,6 +46,8 @@ export default function BookContainer({ settingFiltered, info }) {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      nProgress.done();
     }
   };
 

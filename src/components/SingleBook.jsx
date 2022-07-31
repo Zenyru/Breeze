@@ -3,10 +3,11 @@ import axios from "axios";
 import { BsDot } from "react-icons/bs";
 import { HiMinusCircle } from "react-icons/hi";
 import { Tooltip } from "@nextui-org/react";
-import {  useRef } from "react";
+import { useRef } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { IoMdArrowDropleft } from "react-icons/io";
 import "react-toastify/dist/ReactToastify.css";
+import nProgress from "nprogress";
 
 const SingleBook = ({
   pageCount,
@@ -58,19 +59,25 @@ const SingleBook = ({
               <form
                 onSubmit={async e => {
                   e.preventDefault();
-                  const currentPage = ref.current?.value;
-                  console.log(ref.current);
-                  const numbCurrentPage = Math.trunc(currentPage);
+                  try {
+                    const currentPage = ref.current?.value;
+                    console.log(ref.current);
+                    const numbCurrentPage = Math.trunc(currentPage);
 
-                  const { data } = await axios.post(`/api/books/${book.id}`, {
-                    currentPage: numbCurrentPage,
-                  });
-                  ref.current.value = "";
-                  ref.current.blur();
-                  setUpdatedBooks(prevBooks => [
-                    ...prevBooks.filter(item => item.id !== book.id),
-                    data,
-                  ]);
+                    nProgress.start();
+                    const { data } = await axios.post(`/api/books/${book.id}`, {
+                      currentPage: numbCurrentPage,
+                    });
+                    ref.current.value = "";
+                    ref.current.blur();
+                    setUpdatedBooks(prevBooks => [
+                      ...prevBooks.filter(item => item.id !== book.id),
+                      data,
+                    ]);
+                  } catch (error) {
+                  } finally {
+                    nProgress.done();
+                  }
                 }}
               >
                 <input
