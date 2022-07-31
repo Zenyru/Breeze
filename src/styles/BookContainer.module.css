@@ -1,15 +1,13 @@
-
-.bookContainerScroll{
-    overflow-y: scroll  ;
-    height: 100%;
+.bookContainerScroll {
+  overflow-y: scroll;
+  /* to increase the size, decrease the second value */
+  height: calc(100vh - 280px);
 }
-
 
 .bookContainerScroll::-webkit-scrollbar {
   width: 16px;
   background-color: transparent;
 }
-
 
 .bookContainerScroll::-webkit-scrollbar-thumb {
   border: 5px solid rgba(0, 0, 0, 0);
@@ -24,4 +22,3 @@
   border-radius: 9999px;
   background-color: #aaaaaa;
 }
-
