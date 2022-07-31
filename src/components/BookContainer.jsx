@@ -48,10 +48,10 @@ export default function BookContainer({ settingFiltered, info }) {
   };
 
   return (
-    <div className="text-white  flex justify-center relative z-0 lg:pb-8 xs:min-h-screen">
-      <div className="h-48 w-48 rounded-xl blur-3xl animate-bounce-slow 2xl:hidden absolute left-[3rem] bottom-[-6rem] bg-[rgba(166,235,18,0.24)] mb-10"></div>
-      <div className="h-48 w-48 rounded-xl blur-3xl animate-bounce-slow 2xl:hidden absolute right-10 top-[5rem] bg-[rgba(44,210,97,0.24)]"></div>
-      <div className=" w-[50rem] md:w-[40rem] sm:w-[30rem] xxs:h-[35rem]  md:h-[26.5rem] h-[28rem]  bg-[#ffffff36] mt-12 rounded-lg ">
+    <div className="text-white max-w-7xl mx-auto h-full flex justify-center relative z-0 pb-4 xxs:pb-0  lg:pb-8 xs:min-h-screen">
+      <div className="h-48 w-48 rounded-xl blur-3xl animate-bounce-slow 2xl:hidden absolute left-[-2rem] bottom-4 bg-[rgba(166,235,18,0.24)] mb-10"></div>
+      <div className="h-48 w-48 rounded-xl blur-3xl animate-bounce-slow 2xl:hidden absolute right-[-2rem] top-[5rem] bg-[rgba(44,210,97,0.24)]"></div>
+      <div className=" w-[50rem] h-[30rem] md:w-[40rem] sm:w-[30rem] xxs:h-[35rem]  md:h-[26.5rem] bg-[#ffffff36] mt-12 rounded-lg ">
         <ul className={styles.bookContainerScroll}>
           {/* mapping the book array in to list items */}
           {books?.map((book, index) => {
