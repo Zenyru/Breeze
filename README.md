@@ -3,3 +3,6 @@
 
 <h1 align="center">Introducing Breeze 📗</h1>
 <p align="center">The Best Way To Keep Records Of The Books You Read </p>
+
+
+<p align="center">created for Hashnode X Planetscale Hackathon </p>
